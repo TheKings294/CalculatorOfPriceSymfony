@@ -1,0 +1,4 @@
+welcome: Welcome to our application
+hello: Hello %name%!
+items:
+    count: '{0} No items|{1} One item|]1,Inf[ %count% items'

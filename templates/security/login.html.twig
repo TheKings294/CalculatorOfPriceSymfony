@@ -1,34 +1,127 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Sign in | YourSaaS{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="min-h-screen bg-gray-50 flex flex-col text-black">
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        {# Back to home #}
+        <div class="p-6">
+            {% include 'components/back_to_home.html.twig' %}
         </div>
-    {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+        <h1>CSRF Debug Test</h1>
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
+        <p>Raw output: {{ csrf_token('authenticate') }}</p>
+
+        <p>Length: {{ csrf_token('authenticate')|length }}</p>
+
+        <p>First 10 chars: {{ csrf_token('authenticate')|slice(0, 10) }}</p>
+
+        <p>Dump:</p>
+        {{ dump(csrf_token('authenticate')) }}
+
+        <p>JSON encode:</p>
+        {{ csrf_token('authenticate')|json_encode }}
+
+        {# Centered container #}
+        <div class="flex flex-1 items-center justify-center px-6">
+            <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-6">
+
+                {# Title #}
+                <div class="text-center">
+                    <h1 class="text-3xl font-extrabold text-gray-900">
+                        Welcome back
+                    </h1>
+                    <p class="mt-2 text-sm text-gray-500">
+                        Sign in to continue to YourSaaS
+                    </p>
+                </div>
+
+                {# Error message #}
+                {% if error %}
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                {# Logged user info #}
+                {% if app.user %}
+                    <div class="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm">
+                        You are logged in as <strong>{{ app.user.userIdentifier }}</strong>.
+                        <a href="{{ path('app_logout') }}" class="underline font-medium">Logout</a>
+                    </div>
+                {% endif %}
+
+                {# Login form #}
+                <form method="post" class="space-y-5">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div>
+                        <label for="inputEmail" class="block text-sm font-medium text-gray-700">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="inputEmail"
+                            value="{{ last_username }}"
+                            required
+                            autofocus
+                            autocomplete="email"
+                            placeholder="you@example.com"
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm
+                               focus:border-blue-500 focus:ring-blue-500 focus:outline-none text-black"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="inputPassword" class="block text-sm font-medium text-gray-700">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="inputPassword"
+                            required
+                            autocomplete="current-password"
+                            placeholder="••••••••"
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm
+                               focus:border-blue-500 focus:ring-blue-500 focus:outline-none text-black"
+                        >
+                    </div>
+
+                    <div class="flex items-center justify-between text-sm">
+                        <label class="flex items-center gap-2 text-gray-600">
+                            <input type="checkbox" name="_remember_me"
+                                   class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            Remember me
+                        </label>
+
+                        <a href="#" class="text-blue-600 hover:underline">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full rounded-xl bg-blue-600 py-3 text-white font-semibold
+                           hover:bg-blue-700 transition focus:outline-none focus:ring-2
+                           focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                        Sign in
+                    </button>
+                </form>
+
+                {# Footer #}
+                <p class="text-center text-sm text-gray-500">
+                    Don’t have an account?
+                    <a href="{{ path('app_register') }}" class="text-blue-600 font-medium hover:underline">
+                        Create one
+                    </a>
+                </p>
+
+            </div>
+        </div>
     </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
 {% endblock %}

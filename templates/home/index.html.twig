@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome | Your SaaS{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen bg-gray-50 text-gray-800">
+
+        {# Header #}
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-gray-900">
+                    YourSaaS
+                </h1>
+
+                <div class="flex gap-4">
+                    <a href="{{ path('app_login') }}"
+                       class="px-5 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition">
+                        Login
+                    </a>
+
+                    <a href="{{ path('app_register') }}"
+                       class="px-5 py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition">
+                        Register
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        {# Hero Section #}
+        <section class="max-w-7xl mx-auto px-6 py-24 text-center">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-6">
+                Build, Manage & Scale Your Business
+            </h2>
+
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10">
+                A modern SaaS platform designed to help you manage everything in one place.
+                Simple, fast and secure.
+            </p>
+
+            <div class="flex justify-center gap-6">
+                <a href="{{ path('app_register') }}"
+                   class="px-8 py-4 bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition">
+                    Get Started
+                </a>
+
+                <a href="{{ path('app_login') }}"
+                   class="px-8 py-4 bg-white border border-gray-300 rounded-xl font-semibold text-gray-700 hover:bg-gray-100 transition">
+                    Sign In
+                </a>
+            </div>
+        </section>
+
+        {# Features Section #}
+        <section class="bg-white py-20">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+                <div class="p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-3">Fast Setup</h3>
+                    <p class="text-gray-600">
+                        Get started in minutes with an intuitive onboarding process.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-3">Secure</h3>
+                    <p class="text-gray-600">
+                        Industry-standard security to keep your data safe.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-3">Scalable</h3>
+                    <p class="text-gray-600">
+                        Designed to grow with your business.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        {# Footer #}
+        <footer class="bg-gray-100 py-6">
+            <div class="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
+                © {{ "now"|date("Y") }} YourSaaS. All rights reserved.
+            </div>
+        </footer>
+
+    </div>
+{% endblock %}
