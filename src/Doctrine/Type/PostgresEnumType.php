@@ -44,6 +44,7 @@ abstract class PostgresEnumType extends Type {
 
 
 /*
+ * SQL Request to create the type in sql
  * $this->addSql('CREATE TYPE prestation_status_enum AS ENUM (\'draft\', \'confirmed\', \'completed\', \'canceled\')');
         $this->addSql('CREATE TYPE recipe_enum AS ENUM (\'starter\', \'main\', \'dessert\', \'side\', \'drink\')');
         $this->addSql('CREATE TYPE taxe_enum AS ENUM (\'no_tva\', \'tva_5_5\', \'tva_10\', \'tva_20\')');
